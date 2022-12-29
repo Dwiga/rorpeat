@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  url: MyString
+  found: false
+  year: 1
+  book: one
+  source: MyString
+
+two:
+  url: MyString
+  found: false
+  year: 1
+  book: two
+  source: MyString

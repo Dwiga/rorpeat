@@ -1,0 +1,49 @@
+.container
+    h1.title Author
+    h2.subtitle
+        | #{@author.name} 
+        = link_to edit_author_path(@author)
+            i.fa.fa-edit
+    
+    .field
+        label.label Name :
+        .field-body
+            .control #{@author.name}
+    
+    .field
+        label.label Bio :
+        .field-body
+            .control #{@author.bio}
+
+    .field
+        label.label Gender :
+        .field-body
+            .control #{@author.gender}
+
+    .field
+        label.label Summary :
+        .field-body
+            .control #{@author.summary}
+
+    .field
+        label.label Born :
+        .field-body
+            .control #{@author.born&.to_date}
+
+    .field
+        label.label Died :
+        .field-body
+            .control #{@author.died&.to_date}
+
+    br/    
+    h2.subtitle Wikipedia
+
+    .field
+        label.label Url :
+        .field-body
+            .control #{@author.wikipedium.url}
+
+    .field
+        label.label Found :
+        .field-body
+            .control #{@author.wikipedium.found}

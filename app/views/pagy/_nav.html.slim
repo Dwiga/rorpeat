@@ -1,0 +1,17 @@
+- link = pagy_link_proc(pagy)
+
+nav.pagy-bulma-nav.pagination.is-centered role="pagination" aria-label="pagination"
+    - if pagy.prev
+        == link.call(pagy.prev, pagy_t('pagy.nav.prev'), 'class="pagination-previous" aria-label="previous page"')
+    - else
+        a.pagination-previous disabled="disabled" == pagy_t('pagy.nav.prev')
+
+    ul.pagination-list
+        - pagy.series.each do |item|
+            - if item.is_a?(Integer)
+                li == link.call item, item, %(class="pagination-link" aria-lable="goto page #{item}")
+            - elsif item.is_a?(String)
+                li == link.call item, item, %(class="pagination-link is-current" aria-lable="page #{item}" aria-current="page")
+            - elsif item == :gap
+                li
+                    span.pagination-ellipsis == pagy_t('pagy.nav.gap')

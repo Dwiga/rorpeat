@@ -1,0 +1,58 @@
+.container
+    h1.title Author
+    h2.subtitle
+        | #{@author.name} 
+        = link_to author_path(@author)
+            i.fa-duotone.fa-eye
+
+    = form_with(model: @author) do |f|
+        .field
+            = f.label :name, class: "label"
+            .field-body
+                .field
+                    p.control
+                        = f.text_field :name, class: "input is-rounded"
+        
+        .field
+            = f.label :bio, class: "label"
+            .field-body
+                .field
+                    .control
+                        = f.text_area :bio, class: "textarea is-rounded", rows: "4"
+
+        .field
+            = f.label :gender, class: "label"
+            .field-body
+                .field
+                    p.control
+                        = f.text_field :gender, class: "input is-rounded"
+
+        .field
+            = f.label :summary, class: "label"
+            .field-body
+                .field
+                    p.control
+                        = f.text_area :summary, class: "textarea", rows: "4"
+
+        .field
+            = f.label :born, class: "label"
+            .control
+                = f.text_field :born, class: "input is-rounded", type: "date", value: "#{@author.born&.to_date}"
+
+        .field
+            = f.label :died, class: "label"
+            .control
+                = f.text_field :died, class: "input is-rounded", type: "date", value: "#{@author.died&.to_date}"
+
+        br/
+        h2.subtitle Wikipedia
+        .field
+            = f.label :url
+            .control
+                = f.text_field :url, class: "input is-rounded", value: "#{@author.wikipedium.url}"
+
+            = f.label :found
+            .control
+                = f.select(:found, [["True", true], ["False", false]], {selected: @author.wikipedium.found}, {class: "input is-rounded"})
+        
+        = f.submit "Submit", class: "button"
