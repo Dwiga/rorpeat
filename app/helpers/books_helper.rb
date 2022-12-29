@@ -13,6 +13,8 @@ module BooksHelper
     end
 
     def search(name, min, max)
+        min ||= []
+        max ||= []
         if name.empty?
             if min.present? and max.empty?
                 return Book.includes(:author).where(Book.arel_table[:pages].gt(min.to_i))
