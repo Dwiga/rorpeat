@@ -27,15 +27,15 @@ module BooksHelper
             end
         elsif name.present?
             if min.present? and max.empty?
-                return Book.includes(:author).where(Book.arel_table[:pages].gt(min.to_i), author: {id: name})
+                return Book.includes(:author).where(Book.arel_table[:pages].gt(min.to_i)).where(author: {id: name})
             elsif min.empty? and max.present?
-                return Book.includes(:author).where(Book.arel_table[:pages].lt(max.to_i))
+                return Book.includes(:author).where(Book.arel_table[:pages].lt(max.to_i)).where(author: {id: name})
             elsif min.present? and max.present?
                 if max.to_i < min.to_i
                     flash[:alert] = "Maximum number should greater that minimum!"
                     return Book.includes(:author).all
                 end
-                return Book.includes(:author).where(pages: min.to_i..max.to_i)
+                return Book.includes(:author).where(pages: min.to_i..max.to_i).where(author: {id: name})
             end
         end
         return Book.includes(:author).all
