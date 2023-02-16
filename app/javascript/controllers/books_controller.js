@@ -1,10 +1,7 @@
-import { Application } from "@hotwired/stimulus"
-import { definitionsFromContext } from "stimulus/webpack-helpers"
+import { Controller } from "@hotwired/stimulus"
 
-const application = Application.start();
-const context = require.context("controllers", true, /.js$/);
-application.load(definitionsFromContext(context));
-
-// Import and register the component
-import StimulusSlimSelect from "stimulus-slimselect"
-application.register('slimselect', StimulusSlimSelect)
+export default class extends Controller {
+  connect() {
+    console.log("Hi, Hello");
+  }
+}

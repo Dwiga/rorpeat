@@ -1,0 +1,140 @@
+.container
+    h1.title Books
+    h2.subtitle
+        | #{@book.title} 
+        = link_to book_path(@book)
+            i.fa-eye
+
+    = form_with model: @book do |f|
+        - book_presenter = BookPresenter.new(@book)
+        .field
+            = f.label :cover, class: "label"
+            .field-body
+                .field
+                    p.control
+                        = f.text_field :cover, class: "input is-rounded"
+
+        .field
+            = f.label :title, class: "label"
+            .field-body
+                .field
+                    p.control
+                        = f.text_field :title, class: "input is-rounded"
+
+        .field
+            = f.label :content_name, class: "label"
+            .field-body
+                .field
+                    p.control
+                        = f.text_field :content_name, class: "input is-rounded"
+        
+        .field
+            = f.label :isbn, class: "label"
+            .field-body
+                .field
+                    p.control
+                        = f.text_field :isbn, class: "input is-rounded"
+
+        .field
+            = f.label :original_title, class: "label"
+            .field-body
+                .field
+                    p.control
+                        = f.text_field :original_title, class: "input is-rounded"
+
+        .field
+            = f.label :year, class: "label"
+            .field-body
+                .field
+                    p.control
+                        = f.text_field :year, class: "input is-rounded", type: "number"
+
+        .field
+            = f.label :language_code, class: "label"
+            .field-body
+                .field
+                    p.control
+                        = f.text_field :language_code, class: "input is-rounded"
+                    
+        .field
+            = f.label :category, class: "label"
+            .field-body
+                .field
+                    p.control
+                        select.select
+                            option[selected='#{@book.category == "Text" ? true : false}'] Text
+                            option[selected='#{@book.category == "Sound" ? true : false}'] Sound
+
+        .field
+            = f.label :plot, class: "label"
+            .field-body
+                .field
+                    .control
+                        = f.text_area :plot, class: "textarea is-rounded", rows: "4"
+
+        .field
+            = f.label :copyright, class: "label"
+            .field-body
+                .field
+                    p.control
+                        = f.text_field :copyright, class: "input is-rounded"
+
+        .field
+            = f.label :average_rating, class: "label"
+            .field-body
+                .field
+                    p.control
+                        = f.text_field :average_rating, class: "input is-rounded"
+
+        .field
+            = f.label :description, class: "label"
+            .field-body
+                .field
+                    .control
+                        = f.text_area :description, class: "textarea is-rounded", rows: "4"
+
+        .field
+            = f.label :loc_class, class: "label"
+            .field-body
+                .field
+                    p.control
+                        = f.text_field :loc_class, class: "input is-rounded"
+
+        .field
+            = f.label :language, class: "label"
+            .field-body
+                .field
+                    p.control
+                        = f.text_field :language, class: "input is-rounded"
+
+        .field
+            = f.label :release_date, class: "label"
+            .field-body
+                .field
+                    p.control
+                        = f.text_field :release_date, class: "input is-rounded", type: "date", value: "#{book_presenter.release_date}"
+
+        .field
+            = f.label :summary, class: "label"
+            .field-body
+                .field
+                    .control
+                        = f.text_area :summary, class: "textarea is-rounded", rows: "4"
+
+        .field
+            = f.label :pages, class: "label"
+            .field-body
+                .field
+                    p.control
+                        = f.text_field :pages, class: "input is-rounded", type: "number"
+
+        .field
+            = f.label :isbn13, class: "label"
+            .field-body
+                .field
+                    p.control
+                        = f.text_field :isbn13, class: "input is-rounded"
+
+        h2.subtitle Goodread
+
+        

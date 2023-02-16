@@ -12,4 +12,11 @@ class BooksController < ApplicationController
         @goodread = @book.wikipedics.find_by(source: "goodreads")
         @wikipedium = @book.wikipedics.find_by(source: "wikipedia")
     end
+
+    def edit
+        @book = Book.includes(:author, :gutenberg, :image_urls, :images, :wikipedics, :book_tags, :similar_books).find(params[:id])
+        @goodread = @book.wikipedics.find_by(source: "goodreads")
+        @wikipedium = @book.wikipedics.find_by(source: "wikipedia")
+        @tags = @book.book_tags.includes(:tag)
+    end
 end

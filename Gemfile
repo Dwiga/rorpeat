@@ -68,3 +68,5 @@ gem "pagy", "~> 5.10"
 
 gem "stimulus-rails", "~> 1.2"
 gem "font-awesome-sass", "~> 6.2.1"
+
+gem "sidekiq", "~> 7.0"
