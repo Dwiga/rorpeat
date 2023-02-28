@@ -44,7 +44,7 @@
             .control
                 = f.text_field :died, class: "input is-rounded", type: "date", value: "#{@author.died&.to_date}"
 
-        br/
+        br
         h2.subtitle Wikipedia
         .field
             = f.label :url
@@ -56,3 +56,7 @@
                 = f.select(:found, [["True", true], ["False", false]], {selected: @author.wikipedium.found}, {class: "input is-rounded"})
         
         = f.submit "Submit", class: "button"
+
+        = turbo_frame_tag dom_id(@author, "author_name") do
+          = f.text_field :name
+          = f.submit

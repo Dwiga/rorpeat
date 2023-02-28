@@ -40,6 +40,6 @@ module BooksHelper
                 return Book.includes(:author).where(pages: min.to_i..max.to_i).where(author: {id: name})
             end
         end
-        return Book.includes(:author).all
+        Book.includes(:author).all
     end
 end

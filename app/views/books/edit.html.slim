@@ -137,4 +137,13 @@
 
         h2.subtitle Goodread
 
+        = turbo_frame_tag dom_id(@book, "title_update") do
+          = f.text_field :title
+          = f.submit
+
+        = turbo_frame_tag "book_page_update_turbo_frame_#{@book.id}" do
+          = f.text_field :pages
+          = f.submit
+
+
         
