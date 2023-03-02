@@ -3,4 +3,5 @@
     .card-content
       p #{comment.name}
       p #{comment.message}
+      = button_to "Delete", comment_path(comment), method: :delete
   br

@@ -11,8 +11,10 @@
         = turbo_frame_tag "comments"
         br
         - @comments.each do |comment|
-          .card
-            .card-content
-              p #{comment.name}
-              p #{comment.message}
+          = turbo_frame_tag dom_id(comment)
+            .card
+              .card-content
+                p #{comment.name}
+                p #{comment.message}
+                = button_to "Delete", comment_path(comment), method: :delete
           br

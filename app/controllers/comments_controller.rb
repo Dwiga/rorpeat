@@ -11,6 +11,17 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+
+    respond_to do |f|
+      f.turbo_stream { render turbo_stream: turbo_stream.remove("comments_book_#{@comment.reference_id}") }
+      f.html { redirect_to comment_url, notice: 'Deleted!' }
+      f.json { head :no_content }
+    end
+  end
+
   private
 
   def comment_data

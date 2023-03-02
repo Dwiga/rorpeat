@@ -19,12 +19,19 @@
                 .control
                     = form.submit "Submit", class: "button", onclick: ""
 
+    .column
+      .control
+        = turbo_frame_tag "new_author_turbo_frame" do
+          .header
+            h1 Author
+            = link_to "New Author", new_author_path, class: "button"
+
     - flash.each do |type, msg|
         .notification.is-danger
             button.delete
             = msg
 
-    br/
+    br
     table.table.is-bordered
         thead
             tr
@@ -43,15 +50,21 @@
                         figure.image.is-96x96.image-modal-trigger data-target="image-modal"
                             img#image src="#{record.cover}"
                     td
-                        = link_to "#{record.title}", book_path(record)
+                      = turbo_frame_tag dom_id(record, "title_index_update") do
+                        = link_to "#{record.title}", book_path(record), data: { turbo_frame: "_top" }
+                        = link_to "Edit title", edit_book_path(record), class: "button"
                     td
-                        = link_to "#{record.author.name}", author_path(record)
-                    td #{record.pages}
+                      = link_to "#{record.author.name}", author_path(record)
+
+                    td
+                      = turbo_frame_tag "page_index_#{record.id}"
+                        | #{record.pages}
+                        = link_to "Edit", edit_book_path(record), class: "button"
                     td #{record.isbn}
                     td #{record.year}
                     td #{record.average_rating}
                     td #{record.release_date&.to_date}
-    br/
+    br
     == render partial: 'pagy/nav', locals: {pagy: @pagy}
 
 .modal#image-modal
@@ -60,7 +73,7 @@
         p.image.is-4by3
             img src="https://bulma.io/images/placeholders/1280x960.png" alt="" id="image-target"
     button.modal-close.is-large aria-label="close"
-= javascript_pack_tag 'index', 'data-turbolinks-track': 'reload'
+= javascript_pack_tag 'index'
 
 javascript:
     document.addEventListener('DOMContentLoaded', () => {
