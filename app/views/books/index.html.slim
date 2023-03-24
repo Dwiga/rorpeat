@@ -52,7 +52,6 @@
                     td
                       = turbo_frame_tag dom_id(record, "title_index_update") do
                         = link_to "#{record.title}", book_path(record), data: { turbo_frame: "_top" }
-                        = link_to "Edit title", edit_book_path(record), class: "button"
                     td
                       = link_to "#{record.author.name}", author_path(record)
 

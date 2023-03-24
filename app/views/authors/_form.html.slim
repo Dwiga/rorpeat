@@ -1,0 +1,10 @@
+= form_with(model: @author) do |f|
+  .columns
+    .column
+      .control
+        = f.label :name
+        = f.text_field :name
+
+    .column
+      .control
+        = f.submit

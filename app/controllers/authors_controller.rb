@@ -3,6 +3,22 @@ class AuthorsController < ApplicationController
     @author = Author.includes(:wikipedium).find(params[:id])
   end
 
+  def new
+    @author = Author.new
+  end
+
+  def create
+    @author = Author.new(author_data)
+
+    respond_to do |f|
+      if @author.save
+        f.html { redirect_to books_url, notice: "Author created" }
+      else
+        f.html { render :new, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def edit
     @author = Author.includes(:wikipedium).find(params[:id])
   end

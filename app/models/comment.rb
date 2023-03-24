@@ -10,4 +10,8 @@ class Comment < ApplicationRecord
   after_destroy_commit lambda {
     broadcast_remove_to "comments_book_#{reference_id}"
   }
+
+  after_update_commit lambda {
+    broadcast_replace_to "comments_book_#{reference_id}"
+  }
 end

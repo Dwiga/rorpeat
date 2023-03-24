@@ -1,0 +1,8 @@
+.container
+  = link_to sanitize("&larr; Back to quotes"), authors_path
+
+  .header
+    h1 New author
+
+  = turbo_frame_tag "new_author_turbo_frame" do
+    = render "form", author: @author
