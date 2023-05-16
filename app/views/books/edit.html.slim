@@ -137,4 +137,15 @@
 
         h2.subtitle Goodread
 
+
+        = turbo_frame_tag dom_id(@book, "title_update") do
+          = f.text_field :title
+          = f.submit
+          = link_to "Cancel", book_path
+
+        = turbo_frame_tag dom_id(@book, "content_update") do
+          = f.text_field :content_name
+          = link_to "Cancel", book_path
+
+
         

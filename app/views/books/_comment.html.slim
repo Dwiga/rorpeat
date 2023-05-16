@@ -1,0 +1,20 @@
+.card
+  .card-content
+    .content
+      h1.has-text-centered Chatbox
+      input type="hidden" data-books-target="id" value="#{@book.id}"
+      input type="hidden" data-books-target="name" value="#{@book.title}"
+      input.input type="text" placeholder="Comment" data-action="keydown.enter->books#send_message" data-books-target="message"
+
+      div.comments-scroll
+        = turbo_stream_from "comments_book_#{@book.id}"
+        = turbo_frame_tag "comments"
+        br
+        - @comments.each do |comment|
+          = turbo_frame_tag dom_id(comment)
+            .card
+              .card-content
+                p #{comment.name}
+                p #{comment.message}
+                = button_to "Delete", comment_path(comment), method: :delete
+          br

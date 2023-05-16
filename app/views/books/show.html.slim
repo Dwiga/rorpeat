@@ -1,153 +1,162 @@
-.container
-    h1.title Book
-    h2.subtitle
-        | #{@book.title} 
-        = link_to edit_book_path(@book)
-            i.fa.fa-edit
+= turbo_frame_tag "main_frame"
+    .container data-controller="books"
+        h1.title Book
+        h2.subtitle
+            | #{@book.title} 
+            = link_to edit_book_path(@book)
+                i.fa.fa-edit
 
-    div
-        figure.image.is-128x128
-            img src="#{@book.cover}"
+        .columns
+          .column.is-one-third
+            div
+              figure.image.is-128x128
+                img src="#{@book.cover}"
 
-    .field
-        label.label Title
-        .field-body
-            .control #{@book.title}
-    
-    .field
-        label.label Content Name
-        .field-body
-            .control #{@book.content_name}
-    
-    .field
-        label.label ISBN
-        .field-body
-            .control #{@book.isbn}
-    
-    .field
-        label.label Original Title
-        .field-body
-            .control #{@book.original_title}
-    
-    .field
-        label.label Year
-        .field-body
-            .control #{@book.year}
-    
-    .field
-        label.label Language Code
-        .field-body
-            .control #{@book.language_code}
+            .field
+              label.label Title
+              = form_with model: @book, data: { turbo_frame: dom_id(@book, "title_update") } do |f|
+                = turbo_frame_tag dom_id(@book, "title_update")
+                  .field-body
+                    = link_to @book.title, edit_book_path(@book)
 
-    .field
-        label.label Category
-        .field-body
-            .control #{@book.category}
-    
-    .field
-        label.label Plot
-        .field-body
-            .control #{@book.plot}
-    
-    .field
-        label.label Copyright
-        .field-body
-            .control #{@book.copyright}
-    
-    .field
-        label.label Average Rating
-        .field-body
-            .control #{@book.average_rating}
-    
-    .field
-        label.label Rating Count
-        .field-body
-            .control #{@book.rating_count}
+            .field
+              label.label Content Name
+              = turbo_frame_tag dom_id(@book, "content_update")
+                .field-body
+                  = link_to @book.content_name, edit_book_path(@book)
 
-    .field
-        label.label Description
-        .field-body
-            .control #{@book.description}
-    
-    .field
-        label.label Loc Class
-        .field-body
-            .control #{@book.loc_class}
-    
-    .field
-        label.label Language
-        .field-body
-            .control #{@book.language}
-    
-    .field
-        label.label Release Date
-        .field-body
-            .control #{@book.release_date&.to_date}
+            .field
+              label.label ISBN
+              .field-body
+                .control #{@book.isbn}
 
-    .field
-        label.label Summary
-        .field-body
-            .control #{@book.summary}
-    
-    .field
-        label.label Pages
-        .field-body
-            .control #{@book.pages}
-    
-    .field
-        label.label ISBN13
-        .field-body
-            .control #{@book.isbn13}
-    
-    h2.subtitle Tags
+            .field
+              label.label Original Title
+              .field-body
+                .control #{@book.original_title}
 
-    .card
-        .card-content
-            .tags
-                - @tags.each do |tag|
-                    span.tag.is-rounded #{tag.tag.name}
+            .field
+              label.label Year
+              .field-body
+                .control #{@book.year}
 
-    br/
-    h2.subtitle Similar Books
+            .field
+                label.label Language Code
+                .field-body
+                    .control #{@book.language_code}
 
-    .card
-        .card-content
-            .tags
-                - @another_books.each do |another|
-                    span.tag.is-rounded #{another.another_book.name}
-    
-    br/
-    h2.subtitle Goodread
+            .field
+              label.label Category
+              .field-body
+                .control #{@book.category}
 
-    .field
-        label.label Url
-        .field-body
-            .control #{@goodread.url}
+          .column
+            = render "books/comment"
+        
+        .field
+            label.label Plot
+            .field-body
+                .control #{@book.plot}
+        
+        .field
+            label.label Copyright
+            .field-body
+                .control #{@book.copyright}
+        
+        .field
+            label.label Average Rating
+            .field-body
+                .control #{@book.average_rating}
+        
+        .field
+            label.label Rating Count
+            .field-body
+                .control #{@book.rating_count}
 
-    .field
-        label.label Found
-        .field-body
-            .control #{@goodread.found}
-    
-    .field
-        label.label Year
-        .field-body
-            .control #{@goodread.year}
-    
-    br/
-    h2.subtitle Wikipedium
+        .field
+            label.label Description
+            .field-body
+                .control #{@book.description}
+        
+        .field
+            label.label Loc Class
+            .field-body
+                .control #{@book.loc_class}
+        
+        .field
+            label.label Language
+            .field-body
+                .control #{@book.language}
+        
+        .field
+            label.label Release Date
+            .field-body
+                .control #{@book.release_date&.to_date}
 
-    .field
-        label.label Url
-        .field-body
-            .control #{@wikipedium.url}
+        .field
+            label.label Summary
+            .field-body
+                .control #{@book.summary}
+        
+        .field
+            label.label Pages
+            .field-body
+                .control #{@book.pages}
+        
+        .field
+            label.label ISBN13
+            .field-body
+                .control #{@book.isbn13}
+        
+        h2.subtitle Tags
 
-    .field
-        label.label Found
-        .field-body
-            .control #{@wikipedium.found}
-    
-    .field
-        label.label Year
-        .field-body
-            .control #{@wikipedium.year}
+        .card
+            .card-content
+                .tags
+                    - @tags.each do |tag|
+                        span.tag.is-rounded #{tag.tag.name}
+
+        br
+        h2.subtitle Similar Books
+
+        .card
+            .card-content
+                .tags
+                    - @another_books.each do |another|
+                        span.tag.is-rounded #{another.another_book.name}
+        
+        br
+        h2.subtitle Goodread
+
+        .field
+            label.label Url
+            .field-body
+                .control #{@goodread.url}
+
+        .field
+            label.label Found
+            .field-body
+                .control #{@goodread.found}
+        
+        .field
+            label.label Year
+            .field-body
+                .control #{@goodread.year}
+        
+        br
+        h2.subtitle Wikipedium
+
+        .field
+            label.label Url
+            .field-body
+                .control #{@wikipedium.url}
+
+        .field
+            label.label Found
+            .field-body
+                .control #{@wikipedium.found}
+        
+        .field
+            label.label Year
+            .field-body
+                .control #{@wikipedium.year}
