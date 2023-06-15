@@ -1,0 +1,12 @@
+---
+:checks_remove: []
+:checks_add:
+  - :rubocop
+  - :debugger
+  - :pry
+  - :merge_conflict
+  - :console_log
+  - :whitespace
+:warnings_remove: []
+:warnings_add:
+  - :json
